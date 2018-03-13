@@ -7,7 +7,7 @@
 
 from collections import Counter
 import re
-
+import codecs
 import torch
 
 from fairseq import dictionary
@@ -48,7 +48,7 @@ class Tokenizer:
             if idx == dict.unk_index and word != dict.unk_word:
                 replaced.update([word])
 
-        with open(filename, 'r') as f:
+        with codecs.open(filename, 'r',encoding='utf-8') as f:
             for line in f:
                 ids = Tokenizer.tokenize(line, dict, tokenize, add_if_not_exist=False, consumer=replaced_consumer)
                 nseq += 1
